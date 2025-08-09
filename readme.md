@@ -2,6 +2,8 @@
 
 This project is a machine learning pipeline that detects fraudulent insurance claims using synthetic data. It includes data preparation, feature engineering, model training, a REST API using FastAPI, and a frontend built with Streamlit.
 
+DISCLAIMER: this README was automatically generated
+
 ---
 
 ## 📌 Problem Statement
@@ -36,12 +38,10 @@ The `preprocessing.py` file handles:
 - One-hot encoding for categorical features (`claim_type`)
 - Standard scaling of numerical features
 - Feature Engineering of three new features:
-   -`avg_claim_per_year` = `claim_amount` / `customer_tenure`
-   -`claims_per_year` = `previous_claims_count` / `customer_tenure`
+   -`avg_claim_per_year` = `claim_amount` / `customer_tenure`  
+   -`claims_per_year` = `previous_claims_count` / `customer_tenure`  
    -`is_high_risk_region` = `location_risk_score` > 0.8
 - Train-test splitting
-
-A pipeline (`get_pipeline`) encapsulates preprocessing steps and is embedded into the model training process for consistency.
 
 ---
 
@@ -49,13 +49,13 @@ A pipeline (`get_pipeline`) encapsulates preprocessing steps and is embedded int
 
 Implemented via `model.py`:
 
-- Logistic Regression
 - Random Forest
 - XGBoost
 
 A wrapper class `FraudDetectionPipeline` handles:
 
-- Training with preprocessing
+- Preprocessing of the data (one-hot encoding, etc)
+- Training
 - Evaluation (Accuracy, AUC)
 - SHAP-based explainability
 - Model saving/loading with `joblib`
@@ -90,21 +90,7 @@ Defines Pydantic models for request validation.
 
 All components run in isolated containers using Docker Compose:
 
-### Structure:
-
-```
-.
-├── docker-compose.yml
-├── backend/
-│   ├── Dockerfile
-│   └── ml/ (training + model code) 
-├── api/
-├── frontend/
-│   ├── Dockerfile
-│   └── app.py
-```
-
-### Services:
+### Services
 
 - `backend`: FastAPI + model
 - `frontend`: Streamlit app
@@ -116,6 +102,16 @@ No explicit network config needed — Docker Compose creates a default network w
 ---
 
 ## 🧪 Run the Project (With Docker)
+
+1. Copy the docker-compose-dockerhub.yml
+
+2. Run
+
+   ```bash
+   docker-compose -f docker-compose-dockerhub.yml up --build
+   ```
+
+Alternatively:
 
 1. Clone the repo
 
@@ -133,14 +129,6 @@ No explicit network config needed — Docker Compose creates a default network w
 
 ---
 
-## 🔧 Development Tips
-
-- Use `PYTHONPATH=.` locally when importing across `ml/` and `api/`
-- Use `python -m backend.ml.main` to train locally and generate model
-- The trained model is saved under `backend/ml/models/`
-
----
-
 ## ✅ Functionality Summary
 
 | Component | Functionality                            |
@@ -151,4 +139,3 @@ No explicit network config needed — Docker Compose creates a default network w
 | Docker    | Full-stack deployment, portable          |
 
 ---
-

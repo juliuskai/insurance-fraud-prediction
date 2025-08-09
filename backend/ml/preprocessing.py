@@ -34,6 +34,8 @@ def prepare_data(df: pd.DataFrame, test_size=0.2, random_state=42):
     return X_train, X_test, y_train, y_test
 
 
+### deprectated as this step is now part within a pipeline defined within the model.py
+
 # Define columns used in transformation
 NUMERIC_FEATURES = [
     "claim_amount", "days_to_submit", "previous_claims_count",
