@@ -37,7 +37,7 @@ The `preprocessing.py` file handles:
 
 - One-hot encoding for categorical features (`claim_type`)
 - Standard scaling of numerical features
-- Feature Engineering of three new features:
+- Feature Engineering of three new features:\
    -`avg_claim_per_year` = `claim_amount` / `customer_tenure`\
    -`claims_per_year` = `previous_claims_count` / `customer_tenure`\
    -`is_high_risk_region` = `location_risk_score` > 0.8
